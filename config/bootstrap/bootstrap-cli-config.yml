@@ -55,29 +55,42 @@ bootstrap:
     # Mapping between IDP (Azure Active Directory) groups and CDF groups.
     idp-cdf-mappings:
     # Support multiple CDF Projects, like dev/test/prod in one config.
-        - cdf-project: <CDF project name> # i.e. bootcamp-01-test
+        - cdf-project: bootcamp-07-test # i.e. bootcamp-01-test
           mappings:
               - cdf-group: cdf:root
-                idp-source-id: <AAD Group Object id>
-                idp-source-name: <AAD Group name>
+                idp-source-id: 99d78db5-4ccb-47f0-b8ab-81d913298226
+                idp-source-name: greenfield-07-test-admin
               - cdf-group: cdf:all:owner
-                idp-source-id: <AAD Group Object Id> # for the AAD Group to be matched to cdf-group
-                idp-source-name: <AAD Group name> # i.e. bootcamp-01-test-all-owner
+                idp-source-id: b7969888-f536-4d61-8663-5ed8a9110e14 # for the AAD Group to be matched to cdf-group
+                idp-source-name: greenfield-07-test-all-owner # i.e. bootcamp-01-test-all-owner
               - cdf-group: cdf:all:read
-                idp-source-id: <AAD Group Object Id> # for the AAD Group to be matched to cdf-group
-                idp-source-name: <AAD Group name> # i.e. bootcamp-01-test-all-read
+                idp-source-id: a3257592-53a3-4809-a8f2-e82d76fec696 # for the AAD Group to be matched to cdf-group
+                idp-source-name: greenfield-07-test-all-read # i.e. bootcamp-01-test-all-read
 
 
     namespaces:
         # Typical config will have a namespace for data sources ("src") and a namespace for use cases ("uc")
-        - ns-name: <Namespace name>
+        - ns-name: src
           description: Data sources for the Ice Cream Factory # HINT
 
           # Node names will normally follow src:001:srcname or uc:001:usecasename naming convention
           ns-nodes:
-              - node-name: <Node name>
+              - node-name: src:sap
                 description: Data from SAP # HINT
+              - node-name: src:opcua
+                description: Data from OPCUA # HINT
         # HINT: Add another namespace below
+        - ns-name: uc
+          description: Use Cases # HINT
+
+          # Node names will normally follow src:001:srcname or uc:001:usecasename naming convention
+          ns-nodes:
+              - node-name: uc:oee
+                description: Overall Equipment Effectiveness (OEE) # HINT
+                shared-access:
+                # read:
+                # - node-name: src:sap
+                # - node-name: src:opcua
 
 
 # de-facto standards for CDF CogniteClient and logger configuration.
